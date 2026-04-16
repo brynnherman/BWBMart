@@ -686,9 +686,8 @@
   </div>
 </div>
 
-<script type="module">
-  import * as amplitude from 'https://cdn.jsdelivr.net/npm/@amplitude/unified/+esm';
-
+<script src="https://cdn.jsdelivr.net/npm/@amplitude/unified/dist/unified.umd.js"></script>
+<script>
   amplitude.initAll('6f1f16808033e3e4229a5f07cef81a83', {
     analytics: { autocapture: true },
     sessionReplay: { sampleRate: 1 }
@@ -724,11 +723,6 @@
       amplitude.track('Demo Request Completed');
     }
   }
-
-  window.openModal = openModal;
-  window.closeModal = closeModal;
-  window.closeModalOnBg = closeModalOnBg;
-  window.showSuccess = showSuccess;
 </script>
 </body>
 </html>
