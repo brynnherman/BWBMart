@@ -686,15 +686,12 @@
   </div>
 </div>
 
-<!-- Amplitude: official async snippet loader -->
-<script type="text/javascript">
-!function(){"use strict";!function(e,t){var r=e.amplitude||{_q:[],_iq:{}};if(r.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");else{r.invoked=!0;var n=t.createElement("script");n.type="text/javascript";n.integrity="sha384-XNX6U2ua04l5JNFdgNd5DJmTErpMJRl9jkUVHqiTvVJ6iFJQjLSQMtWPBfHiETk";n.crossOrigin="anonymous";n.async=!0;n.src="https://cdn.amplitude.com/libs/unified-1.0.0.min.js";n.onload=function(){e.amplitude.runQueuedFunctions||console.log("[Amplitude] Error: could not load SDK")};var s=t.getElementsByTagName("script")[0];s.parentNode.insertBefore(n,s);function i(e,t){e.prototype[t]=function(){return this._q.push({name:t,args:Array.prototype.slice.call(arguments,0)}),this}}var o=function(){this._q=[];return this};var a=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove","getUserProperties"];for(var c=0;c<a.length;c++){i(o,a[c])}r.Identify=o;var u=function(){this._q=[];return this};var l=["getEventProperties","setProductId","setQuantity","setPrice","setRevenue","setRevenueType","setEventProperties"];for(var p=0;p<l.length;p++){i(u,l[p])}r.Revenue=u;var d=["getDeviceId","setDeviceId","getSessionId","setSessionId","getUserId","setUserId","setOptOut","setTransport","reset","extendSession"];var f=["init","add","remove","track","logEvent","identify","groupIdentify","setGroup","revenue","flush"];function m(e){function t(t,r){e[t]=function(){var n={promise:new Promise((r=>{e._q.push({name:t,args:Array.prototype.slice.call(arguments,0),resolve:r})}))};if(r){n.promise=n.promise.then((e=>e.promise))}return n}}for(var r=0;r<d.length;r++){t(d[r],!1)}for(var n=0;n<f.length;n++){t(f[n],!0)}}m(r);r.getInstance=function(e){return e=(!e||e.length===0?"$default_instance":e).toLowerCase(),Object.prototype.hasOwnProperty.call(r._iq,e)||(r._iq[e]={_q:[]},m(r._iq[e])),r._iq[e]};e.amplitude=r}}(window,document)}();
-
-  amplitude.init('6f1f16808033e3e4229a5f07cef81a83', {
-    autocapture: true,
-    plugins: [
-      amplitude.sessionReplayPlugin({ sampleRate: 1 })
-    ]
+<script src="https://cdn.amplitude.com/script/6f1f16808033e3e4229a5f07cef81a83.js"></script>
+<script>
+  window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+  window.amplitude.init('6f1f16808033e3e4229a5f07cef81a83', {
+    fetchRemoteConfig: true,
+    autocapture: true
   });
 </script>
 
