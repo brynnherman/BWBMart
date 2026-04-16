@@ -693,36 +693,42 @@
     sessionReplay: { sampleRate: 1 }
   });
 
-  function openModal(type) {
-    document.getElementById('modal-overlay').classList.add('open');
-    document.getElementById('modal-signup').style.display = type === 'signup' ? 'block' : 'none';
-    document.getElementById('modal-demo').style.display = type === 'demo' ? 'block' : 'none';
+  document.addEventListener('DOMContentLoaded', function () {
+    var overlay = document.getElementById('modal-overlay');
+    var modalSignup = document.getElementById('modal-signup');
+    var modalDemo = document.getElementById('modal-demo');
 
-    if (type === 'signup') {
-      amplitude.track('Sign Up Clicked', { location: document.activeElement?.closest('section')?.id || 'nav' });
-    } else if (type === 'demo') {
-      amplitude.track('Demo Requested', { location: document.activeElement?.closest('section')?.id || 'nav' });
-    }
-  }
+    window.openModal = function (type) {
+      overlay.classList.add('open');
+      modalSignup.style.display = type === 'signup' ? 'block' : 'none';
+      modalDemo.style.display = type === 'demo' ? 'block' : 'none';
 
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('open');
-  }
+      if (type === 'signup') {
+        amplitude.track('Sign Up Clicked');
+      } else if (type === 'demo') {
+        amplitude.track('Demo Requested');
+      }
+    };
 
-  function closeModalOnBg(e) {
-    if (e.target === document.getElementById('modal-overlay')) closeModal();
-  }
+    window.closeModal = function () {
+      overlay.classList.remove('open');
+    };
 
-  function showSuccess(type) {
-    document.getElementById(type + '-form-wrap').style.display = 'none';
-    document.getElementById(type + '-success').style.display = 'block';
+    window.closeModalOnBg = function (e) {
+      if (e.target === overlay) window.closeModal();
+    };
 
-    if (type === 'signup') {
-      amplitude.track('Sign Up Completed');
-    } else if (type === 'demo') {
-      amplitude.track('Demo Request Completed');
-    }
-  }
+    window.showSuccess = function (type) {
+      document.getElementById(type + '-form-wrap').style.display = 'none';
+      document.getElementById(type + '-success').style.display = 'block';
+
+      if (type === 'signup') {
+        amplitude.track('Sign Up Completed');
+      } else if (type === 'demo') {
+        amplitude.track('Demo Request Completed');
+      }
+    };
+  });
 </script>
 </body>
 </html>
