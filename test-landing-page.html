@@ -499,6 +499,15 @@
     .mock-cards { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
+ <script src="https://cdn.amplitude.com/script/6f1f16808033e3e4229a5f07cef81a83.js"></script>
+<script>
+  window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+  window.amplitude.init('6f1f16808033e3e4229a5f07cef81a83', {
+    fetchRemoteConfig: true,
+    autocapture: true
+  });
+</script>
+
 </head>
 <body>
 
@@ -686,14 +695,6 @@
   </div>
 </div>
 
-<script src="https://cdn.amplitude.com/script/6f1f16808033e3e4229a5f07cef81a83.js"></script>
-<script>
-  window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
-  window.amplitude.init('6f1f16808033e3e4229a5f07cef81a83', {
-    fetchRemoteConfig: true,
-    autocapture: true
-  });
-</script>
 
 <script>
   function openModal(type) {
