@@ -686,22 +686,49 @@
   </div>
 </div>
 
-<script>
+<script type="module">
+  import * as amplitude from 'https://cdn.jsdelivr.net/npm/@amplitude/unified/+esm';
+
+  amplitude.initAll('6f1f16808033e3e4229a5f07cef81a83', {
+    analytics: { autocapture: true },
+    sessionReplay: { sampleRate: 1 }
+  });
+
   function openModal(type) {
     document.getElementById('modal-overlay').classList.add('open');
     document.getElementById('modal-signup').style.display = type === 'signup' ? 'block' : 'none';
     document.getElementById('modal-demo').style.display = type === 'demo' ? 'block' : 'none';
+
+    if (type === 'signup') {
+      amplitude.track('Sign Up Clicked', { location: document.activeElement?.closest('section')?.id || 'nav' });
+    } else if (type === 'demo') {
+      amplitude.track('Demo Requested', { location: document.activeElement?.closest('section')?.id || 'nav' });
+    }
   }
+
   function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
   }
+
   function closeModalOnBg(e) {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
   }
+
   function showSuccess(type) {
     document.getElementById(type + '-form-wrap').style.display = 'none';
     document.getElementById(type + '-success').style.display = 'block';
+
+    if (type === 'signup') {
+      amplitude.track('Sign Up Completed');
+    } else if (type === 'demo') {
+      amplitude.track('Demo Request Completed');
+    }
   }
+
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.closeModalOnBg = closeModalOnBg;
+  window.showSuccess = showSuccess;
 </script>
 </body>
 </html>
